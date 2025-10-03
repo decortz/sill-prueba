@@ -11,94 +11,20 @@ st.set_page_config(page_title="Sistema Integrado de Llantas", layout="wide", ini
 
 # CSS personalizado con colores corporativos
 st.markdown("""
-    <style>
-    /* Botones principales */
+<style>
     .stButton>button {
         background-color: #2A2D62;
         color: white;
-        border: none;
     }
     .stButton>button:hover {
         background-color: #F2B705;
         color: #2A2D62;
-        border: none;
     }
-    
-    /* Tabs - cambiar rojo por amarillo */
-    .stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
-        background-color: #F2B705;
+    div[data-testid="stMarkdownContainer"] > p > strong {
         color: #2A2D62;
     }
-    
-    .stTabs [data-baseweb="tab-list"] button:hover {
-        background-color: #F2B705;
-        color: #2A2D62;
-    }
-    
-    .stTabs [data-baseweb="tab-highlight"] {
-        background-color: #F2B705;
-    }
-    
-    /* Radio buttons del menú - cambiar rojo por amarillo */
-    .stRadio > label > div[role="radiogroup"] > label > div:first-child {
-        background-color: white;
-    }
-    
-    .stRadio > label > div[role="radiogroup"] > label[data-checked="true"] > div:first-child {
-        background-color: #F2B705 !important;
-    }
-    
-    .stRadio > label > div[role="radiogroup"] > label:hover > div:first-child {
-        background-color: #F2B705 !important;
-    }
-    
-    /* Checkboxes */
-    .stCheckbox > label > div[data-checked="true"] {
-        background-color: #F2B705 !important;
-    }
-    
-    /* Selectbox focus */
-    .stSelectbox > div > div > div:focus-within {
-        border-color: #F2B705 !important;
-    }
-    
-    /* Text input focus */
-    .stTextInput > div > div > input:focus {
-        border-color: #F2B705 !important;
-        box-shadow: 0 0 0 1px #F2B705 !important;
-    }
-    
-    /* Number input focus */
-    .stNumberInput > div > div > input:focus {
-        border-color: #F2B705 !important;
-        box-shadow: 0 0 0 1px #F2B705 !important;
-    }
-    
-    /* Multiselect */
-    .stMultiSelect > div > div > div:focus-within {
-        border-color: #F2B705 !important;
-    }
-    
-    /* Links */
-    a {
-        color: #2A2D62 !important;
-    }
-    
-    a:hover {
-        color: #F2B705 !important;
-    }
-    
-    /* Expander cuando está abierto */
-    .streamlit-expanderHeader:hover {
-        background-color: rgba(242, 183, 5, 0.1);
-    }
-    
-    /* Métricas - borde amarillo */
-    [data-testid="stMetricValue"] {
-        color: #2A2D62;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+</style>
+""", unsafe_allow_html=True)
 
 # Directorios para datos
 if 'DATA_DIR' not in st.session_state:
@@ -1589,5 +1515,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
