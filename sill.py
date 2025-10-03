@@ -45,47 +45,33 @@ st.markdown("""
         background-color: #F2B705 !important;
     }
     
-    /* Radio buttons del menú - CORREGIDO */
-    /* El círculo exterior cuando está seleccionado */
+    /* Radio buttons - CÍRCULO AMARILLO */
+    /* Quitar el fondo amarillo del texto */
     div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] {
-        color: inherit;
+        background-color: transparent !important;
     }
     
-    /* El punto interior del radio button */
-    div[role="radiogroup"] label input[type="radio"]:checked + div {
-        background-color: #F2B705 !important;
-    }
-    
-    div[role="radiogroup"] label input[type="radio"] + div {
-        border-color: #cccccc;
-    }
-    
-    div[role="radiogroup"] label:hover input[type="radio"] + div {
-        border-color: #F2B705;
-    }
-    
-    div[role="radiogroup"] label input[type="radio"]:checked + div::after {
-        background-color: #F2B705 !important;
-    }
-    
-    /* Alternativa más agresiva si lo anterior no funciona */
+    /* El círculo exterior del radio */
     [data-baseweb="radio"] > div:first-child {
-        border-color: #cccccc;
+        border-color: #cccccc !important;
     }
     
+    /* Hover en el círculo */
     [data-baseweb="radio"]:hover > div:first-child {
-        border-color: #F2B705;
+        border-color: #F2B705 !important;
     }
     
-    [data-baseweb="radio"] > div:first-child > div {
-        background-color: white;
+    /* El punto/círculo interior cuando está seleccionado */
+    [data-baseweb="radio"] > div:first-child > div:first-child {
+        background-color: transparent;
     }
     
-    [data-baseweb="radio"] input:checked ~ div:first-child > div {
+    [data-baseweb="radio"][aria-checked="true"] > div:first-child > div:first-child {
         background-color: #F2B705 !important;
     }
     
-    [data-baseweb="radio"] input:checked ~ div:first-child {
+    /* Borde del círculo cuando está seleccionado */
+    [data-baseweb="radio"][aria-checked="true"] > div:first-child {
         border-color: #F2B705 !important;
     }
     
@@ -1633,6 +1619,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
