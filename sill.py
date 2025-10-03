@@ -45,33 +45,46 @@ st.markdown("""
         background-color: #F2B705 !important;
     }
     
-    /* Radio buttons - CÍRCULO AMARILLO */
-    /* Quitar el fondo amarillo del texto */
-    div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] {
-        background-color: transparent !important;
-    }
-    
-    /* El círculo exterior del radio */
-    [data-baseweb="radio"] > div:first-child {
+    /* Radio buttons - FORZAR AMARILLO */
+    /* Sobrescribir TODOS los colores rosa/rojo por amarillo */
+    div[data-baseweb="radio"] > div,
+    div[data-baseweb="radio"] > div > div,
+    [role="radio"] > div,
+    [role="radio"] > div > div {
         border-color: #cccccc !important;
     }
     
-    /* Hover en el círculo */
-    [data-baseweb="radio"]:hover > div:first-child {
+    div[data-baseweb="radio"]:hover > div,
+    [role="radio"]:hover > div {
         border-color: #F2B705 !important;
     }
     
-    /* El punto/círculo interior cuando está seleccionado */
-    [data-baseweb="radio"] > div:first-child > div:first-child {
-        background-color: transparent;
+    /* El círculo interior - sobrescribir rosa por amarillo */
+    div[data-baseweb="radio"] > div > div,
+    [role="radio"] > div > div,
+    div[aria-checked="true"] > div > div,
+    [aria-checked="true"] > div > div {
+        background-color: transparent !important;
     }
     
-    [data-baseweb="radio"][aria-checked="true"] > div:first-child > div:first-child {
+    div[data-baseweb="radio"][aria-checked="true"] > div,
+    [role="radio"][aria-checked="true"] > div,
+    div[aria-checked="true"] > div {
+        border-color: #F2B705 !important;
+    }
+    
+    div[data-baseweb="radio"][aria-checked="true"] > div > div,
+    [role="radio"][aria-checked="true"] > div > div,
+    div[aria-checked="true"] > div > div {
         background-color: #F2B705 !important;
     }
     
-    /* Borde del círculo cuando está seleccionado */
-    [data-baseweb="radio"][aria-checked="true"] > div:first-child {
+    /* Sobrescribir el color rosa de Streamlit en todas las variantes */
+    [class*="st-"][class*="emotion"] [data-baseweb="radio"][aria-checked="true"] > div > div {
+        background-color: #F2B705 !important;
+    }
+    
+    [class*="st-"][class*="emotion"] [data-baseweb="radio"][aria-checked="true"] > div {
         border-color: #F2B705 !important;
     }
     
@@ -1619,6 +1632,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
