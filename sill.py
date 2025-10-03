@@ -45,22 +45,47 @@ st.markdown("""
         background-color: #F2B705 !important;
     }
     
-    /* Radio buttons del menú - círculo amarillo cuando está seleccionado */
-    .stRadio > label > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] {
-        color: #262730;
+    /* Radio buttons del menú - CORREGIDO */
+    /* El círculo exterior cuando está seleccionado */
+    div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] {
+        color: inherit;
     }
     
-    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child > div {
-        background-color: white;
+    /* El punto interior del radio button */
+    div[role="radiogroup"] label input[type="radio"]:checked + div {
+        background-color: #F2B705 !important;
+    }
+    
+    div[role="radiogroup"] label input[type="radio"] + div {
         border-color: #cccccc;
     }
     
-    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"]:hover > div:first-child > div {
+    div[role="radiogroup"] label:hover input[type="radio"] + div {
         border-color: #F2B705;
     }
     
-    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child > div[data-checked="true"] {
+    div[role="radiogroup"] label input[type="radio"]:checked + div::after {
         background-color: #F2B705 !important;
+    }
+    
+    /* Alternativa más agresiva si lo anterior no funciona */
+    [data-baseweb="radio"] > div:first-child {
+        border-color: #cccccc;
+    }
+    
+    [data-baseweb="radio"]:hover > div:first-child {
+        border-color: #F2B705;
+    }
+    
+    [data-baseweb="radio"] > div:first-child > div {
+        background-color: white;
+    }
+    
+    [data-baseweb="radio"] input:checked ~ div:first-child > div {
+        background-color: #F2B705 !important;
+    }
+    
+    [data-baseweb="radio"] input:checked ~ div:first-child {
         border-color: #F2B705 !important;
     }
     
@@ -1608,6 +1633,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
