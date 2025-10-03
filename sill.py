@@ -658,6 +658,21 @@ def crear_llantas():
         return
     
     df_clientes = pd.read_csv(CLIENTES_FILE, encoding='utf-8')
+    df_llantas = pd.read_csv(LLANTAS_FILE, encoding='utf-8')
+    
+    # VALIDACIÓN: Limpiar llantas con NITs inválidos
+    if not df_llantas.empty and not df_clientes.empty:
+        nits_validos = df_clientes['nit'].tolist()
+        llantas_invalidas = df_llantas[~df_llantas['nit_cliente'].isin(nits_validos)]
+        
+        if not llantas_invalidas.empty:
+            st.warning(f"⚠️ Se encontraron {len(llantas_invalidas)} llantas con clientes inválidos")
+            if st.button("🗑️ Eliminar llantas con datos inválidos"):
+                df_llantas = df_llantas[df_llantas['nit_cliente'].isin(nits_validos)]
+                df_llantas.to_csv(LLANTAS_FILE, index=False, encoding='utf-8')
+                st.success("✅ Llantas inválidas eliminadas")
+                st.rerun()
+            st.stop()
     
     clientes_acceso = obtener_clientes_accesibles()
     df_clientes = df_clientes[df_clientes['nit'].isin(clientes_acceso)]
@@ -674,10 +689,18 @@ def crear_llantas():
         col1, col2, col3 = st.columns(3)
         
         with col1:
+            # SAFE format_func que maneja errores
+            def format_cliente(x):
+                try:
+                    nombre = df_clientes[df_clientes['nit']==x]['nombre_cliente'].values
+                    return nombre[0] if len(nombre) > 0 else f"NIT: {x}"
+                except:
+                    return f"NIT: {x}"
+            
             cliente_seleccionado = st.selectbox(
                 "Cliente",
                 options=df_clientes['nit'].values,
-                format_func=lambda x: f"{df_clientes[df_clientes['nit']==x]['nombre_cliente'].values[0]}",
+                format_func=format_cliente,
                 key="llanta_cliente"
             )
             marca_llanta = st.text_input("Marca de Llanta")
@@ -732,7 +755,8 @@ def crear_llantas():
         df_llantas = df_llantas[df_llantas['nit_cliente'].isin(clientes_acceso)]
         
         if not df_llantas.empty:
-            df_display = df_llantas.merge(df_clientes[['nit', 'nombre_cliente']], left_on='nit_cliente', right_on='nit')
+            df_display = df_llantas.merge(df_clientes[['nit', 'nombre_cliente']], left_on='nit_cliente', right_on='nit', how='left')
+            df_display['nombre_cliente'].fillna('Cliente Inválido', inplace=True)
             columnas_mostrar = [col for col in ['id_llanta', 'nombre_cliente', 'marca_llanta', 'referencia', 'dimension', 'disponibilidad', 'placa_vehiculo', 'vida'] if col in df_display.columns]
             st.dataframe(df_display[columnas_mostrar], use_container_width=True)
         else:
@@ -1491,3 +1515,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
