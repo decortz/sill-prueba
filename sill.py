@@ -11,20 +11,113 @@ st.set_page_config(page_title="Sistema Integrado de Llantas", layout="wide", ini
 
 # CSS personalizado con colores corporativos
 st.markdown("""
-<style>
+    <style>
+    /* Botones principales */
     .stButton>button {
         background-color: #2A2D62;
         color: white;
+        border: none;
     }
     .stButton>button:hover {
         background-color: #F2B705;
         color: #2A2D62;
+        border: none;
     }
-    div[data-testid="stMarkdownContainer"] > p > strong {
-        color: #2A2D62;
+    
+    /* Tabs - solo texto amarillo, fondo transparente */
+    .stTabs [data-baseweb="tab-list"] button {
+        background-color: transparent;
+        color: #5c5c5c;
     }
-</style>
-""", unsafe_allow_html=True)
+    
+    .stTabs [data-baseweb="tab-list"] button[aria-selected="true"] {
+        background-color: transparent;
+        color: #F2B705 !important;
+        font-weight: bold;
+    }
+    
+    .stTabs [data-baseweb="tab-list"] button:hover {
+        background-color: transparent;
+        color: #F2B705;
+    }
+    
+    .stTabs [data-baseweb="tab-highlight"] {
+        background-color: #F2B705 !important;
+    }
+    
+    /* Radio buttons del menú - círculo amarillo cuando está seleccionado */
+    .stRadio > label > div[role="radiogroup"] > label > div[data-testid="stMarkdownContainer"] {
+        color: #262730;
+    }
+    
+    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child > div {
+        background-color: white;
+        border-color: #cccccc;
+    }
+    
+    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"]:hover > div:first-child > div {
+        border-color: #F2B705;
+    }
+    
+    .stRadio > label > div[role="radiogroup"] > label[data-baseweb="radio"] > div:first-child > div[data-checked="true"] {
+        background-color: #F2B705 !important;
+        border-color: #F2B705 !important;
+    }
+    
+    /* Checkboxes */
+    .stCheckbox > label > div[data-testid="stCheckbox"] > div {
+        border-color: #cccccc;
+    }
+    
+    .stCheckbox > label > div[data-testid="stCheckbox"]:hover > div {
+        border-color: #F2B705;
+    }
+    
+    .stCheckbox > label > div[data-testid="stCheckbox"] > div[data-checked="true"] {
+        background-color: #F2B705 !important;
+        border-color: #F2B705 !important;
+    }
+    
+    /* Text input focus */
+    .stTextInput > div > div > input:focus {
+        border-color: #F2B705 !important;
+        box-shadow: 0 0 0 1px #F2B705 !important;
+    }
+    
+    /* Number input focus */
+    .stNumberInput > div > div > input:focus {
+        border-color: #F2B705 !important;
+        box-shadow: 0 0 0 1px #F2B705 !important;
+    }
+    
+    /* Date input focus */
+    .stDateInput > div > div > input:focus {
+        border-color: #F2B705 !important;
+        box-shadow: 0 0 0 1px #F2B705 !important;
+    }
+    
+    /* Selectbox focus */
+    .stSelectbox > div > div:focus-within {
+        border-color: #F2B705 !important;
+        box-shadow: 0 0 0 1px #F2B705 !important;
+    }
+    
+    /* Multiselect */
+    .stMultiSelect > div > div:focus-within {
+        border-color: #F2B705 !important;
+        box-shadow: 0 0 0 1px #F2B705 !important;
+    }
+    
+    /* Links */
+    a {
+        color: #2A2D62 !important;
+    }
+    
+    a:hover {
+        color: #F2B705 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # Directorios para datos
 if 'DATA_DIR' not in st.session_state:
@@ -1515,6 +1608,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
